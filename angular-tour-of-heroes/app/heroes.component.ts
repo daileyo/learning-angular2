@@ -4,7 +4,7 @@ import { HeroService } from './hero.service';
 import { OnInit } from '@angular/core';
 
 @Component({  
-  selector: 'my-app',
+  selector: 'my-heroes',
   template: `<h1>{{title}}</h1>
              <h2>My Heroes</h2>
              <ul class="heroes">
@@ -68,7 +68,7 @@ import { OnInit } from '@angular/core';
 
 })
 
-export class AppComponent implements OnInit { 
+export class HeroesComponent implements OnInit { 
   title = 'Tour of Heroes';
   selectedHero: Hero;
   heroes: Hero[];
