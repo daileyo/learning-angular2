@@ -9,6 +9,10 @@ import { Hero } from './hero';
 export class HeroService {
 
     private heroesUrl = 'app/heroes';  // URL to web api
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    }
 
     constructor(private http: Http) { }
 
@@ -16,7 +20,7 @@ export class HeroService {
     return this.http.get(this.heroesUrl)
                 .toPromise()
                 .then(response => response.json().data as Hero[])
-                //.catch(this.handleError);
+                .catch(this.handleError);
     }
     getHero(id: number): Promise<Hero> {
         return this.getHeroes()
