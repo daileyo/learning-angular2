@@ -8,13 +8,24 @@ import { Hero } from './hero';
 @Injectable()
 export class HeroService {
 
+    constructor(private http: Http) { }
+
     private heroesUrl = 'app/heroes';  // URL to web api
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
 
-    constructor(private http: Http) { }
+    private headers = new Headers({'Content-Type': 'application/json'});
+
+        update(hero: Hero): Promise<Hero> {
+        const url = `${this.heroesUrl}/${hero.id}`;
+        return this.http
+                   .put(url, JSON.stringify(hero), {headers: this.headers})
+                   .toPromise()
+                   .then(() => hero)
+                   .catch(this.handleError);
+    }
 
     getHeroes(): Promise<Hero[]> {
     return this.http.get(this.heroesUrl)
