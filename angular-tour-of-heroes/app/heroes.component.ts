@@ -22,6 +22,17 @@ export class HeroesComponent implements OnInit {
     private router: Router,
     private heroService: HeroService) { }
 
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService.create(name)
+      .then(hero => {
+        this.heroes.push(hero);
+        this.selectedHero = null;
+      });
+  }
+
+
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
   }
